@@ -2,14 +2,17 @@ package learning
 
 object CurryingExample {
   def main(args: Array[String]): Unit = {
-    println(s"Results of sumInts is ${sumInts(2, 5)}")
     println(s"Results of sumCube is ${sumCube(2, 5)}")
-    println(s"Results of sumFactorial is ${sumFactorial(2, 5)}")
-    println(s"Results of sum cube is ${sum(cube, 2, 5)}")
-    println(s"Results of sum factorial is ${sum(fact, 2, 5)}")
+    val sumFunction = sum(x => x * x * x)
+    println(s"Results of sum cube is ${sumFunction(2, 5)}")
+    println(s"Results of sum cube is ${sumCurrying(x => x * x * x)(2, 5)}")
+    println(s"Results of sum cube is ${sum(x => x * x * x)(2, 5)}")
+
   }
 
-  def cube(x: Int) = x * x * x
+  def id(x: Int): Int = x
+
+  def cube(x: Int): Int = x * x * x
 
   def fact(x: Int): Int = if (x == 1) 1 else x * fact(x - 1)
 
@@ -22,6 +25,12 @@ object CurryingExample {
   def sumFactorial(a: Int, b: Int): Int =
     if a > b then 0 else fact(a) + sumFactorial(a + 1, b)
 
-  def sum(f: Int => Int, a: Int, b: Int): Int =
-    if a > b then 0 else f(a) + sum(f, a + 1, b)
+  def sumCurrying(f: Int => Int): (Int, Int) => Int =
+    def sumF(a: Int, b:Int): Int =
+      if a > b then 0 else f(a) + sumF(a + 1, b)
+    sumF
+
+  def sum(f: Int => Int)(a: Int, b: Int): Int =
+      if a > b then 0 else f(a) + sum(f)(a + 1, b)
+
 }
