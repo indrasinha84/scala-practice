@@ -8,6 +8,7 @@ object Subsequence:
     println(findSequence(left, right, "").head)
 
 
-  private def findSequence(left: String, right: String, result: String): Seq[String] = left.flatMap(c => right.split(c.toString, 2) match
-    case Array(_, remaining) => findSequence(left.tail, remaining, result + c)
-    case _ => Seq(result)).sortBy(-_.length)
+  private def findSequence(left: String, right: String, result: String): Seq[String] =
+    left.flatMap(c => right.split(c.toString, 2) match
+      case Array(_, remaining) => findSequence(left.tail, remaining, result + c)
+      case _ => Seq(result)).sortBy(-_.length)
