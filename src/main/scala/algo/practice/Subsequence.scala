@@ -24,8 +24,6 @@ object Subsequence:
     if left.isEmpty || right.isEmpty then
       result
     else
-      val positionInRight = right.lastIndexOf(left.last)
-      if positionInRight == -1 then
-        findSequenceWithTailRec(left.init, right, result)
-      else
-        findSequenceWithTailRec(left.init, right.take(positionInRight), left.last + result)
+      right.reverse.split(left.last.toString, 2) match
+        case Array(_, remaining) => findSequenceWithTailRec(left.init, remaining.reverse, left.last + result)
+        case _ => findSequenceWithTailRec(left.init, right, result)
