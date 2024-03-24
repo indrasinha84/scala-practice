@@ -9,5 +9,5 @@ object Subsequence:
 
   private def findSequence(left: String, right: String, result: String): Seq[String] =
     left.flatMap(c => right.split(c.toString, 2) match
-      case Array(_, remaining) => findSequence(left.tail, remaining, result + c)
+      case Array(_, remaining) => findSequence(left.split(c.toString, 2).last, remaining, result + c)
       case _ => Seq(result))
