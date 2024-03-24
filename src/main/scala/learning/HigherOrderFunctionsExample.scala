@@ -18,7 +18,7 @@ object HigherOrderFunctionsExample {
 
   def cube(x: Int): Int = x * x * x
 
-  def fact(x: Int): Int = if (x == 1) 1 else x * fact(x - 1)
+  def fact(x: Int): Int = if x == 1 then 1 else x * fact(x - 1)
 
   def sumInts(a: Int, b: Int): Int =
     if a > b then 0 else a + sumInts(a + 1, b)
@@ -34,7 +34,7 @@ object HigherOrderFunctionsExample {
 
   def sum(f: Int => Int, a: Int, b: Int): Int =
     def loop(a: Int, acc: Int): Int =
-      if (a > b) acc else loop(a + 1, acc + f(a))
+      if a > b then acc else loop(a + 1, acc + f(a))
     loop(a, 0)
 
 }

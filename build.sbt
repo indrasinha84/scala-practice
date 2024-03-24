@@ -6,3 +6,6 @@ lazy val root = (project in file("."))
   .settings(
     name := "scala-practice"
   )
+
+scalacOptions ++= Seq("-new-syntax", "-rewrite")
+

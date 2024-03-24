@@ -14,7 +14,7 @@ object CurryingExample {
 
   def cube(x: Int): Int = x * x * x
 
-  def fact(x: Int): Int = if (x == 1) 1 else x * fact(x - 1)
+  def fact(x: Int): Int = if x == 1 then 1 else x * fact(x - 1)
 
   def sumInts(a: Int, b: Int): Int =
     if a > b then 0 else a + sumInts(a + 1, b)
